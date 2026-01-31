@@ -1,55 +1,55 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import { ChevronDown } from 'lucide-react'
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
-import { db } from '@/lib/firebase'
-import { toast } from 'sonner'
-import { Toaster } from '@/components/ui/sonner'
+import { useEffect, useState } from "react";
+import { ChevronDown } from "lucide-react";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "@/lib/firebase";
+import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function ComingSoonPage() {
-  const [isVisible, setIsVisible] = useState(false)
-  const [scrollY, setScrollY] = useState(0)
-  const [email, setEmail] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsVisible(true)
-    
+    setIsVisible(true);
+
     const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
-    
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    
+    e.preventDefault();
+
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      toast.error('Please enter a valid email address')
-      return
+      toast.error("Please enter a valid email address");
+      return;
     }
 
-    setIsLoading(true)
+    setIsLoading(true);
 
     try {
-      await addDoc(collection(db, 'registrations'), {
+      await addDoc(collection(db, "registrations"), {
         email,
         timestamp: serverTimestamp(),
-        status: 'pending'
-      })
-      
-      toast.success('Thanks for registering! We\'ll notify you when we launch.')
-      setEmail('')
+        status: "pending",
+      });
+
+      toast.success("Thanks for registering! We'll notify you when we launch.");
+      setEmail("");
     } catch (error: any) {
-      console.error('Registration error:', error)
-      toast.error(error?.message || 'Registration failed. Please try again.')
+      console.error("Registration error:", error);
+      toast.error(error?.message || "Registration failed. Please try again.");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <main className="min-h-screen bg-background text-foreground overflow-hidden">
@@ -57,10 +57,10 @@ export default function ComingSoonPage() {
       <div className="fixed inset-0 pointer-events-none">
         {/* Large black rectangle - top right */}
         <div className="absolute -top-32 -right-32 w-96 h-96 bg-primary border-8 border-primary opacity-5" />
-        
+
         {/* Medium black rectangle - bottom left */}
         <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-primary opacity-5 border-4 border-primary" />
-        
+
         {/* Accent color bar - left side */}
         <div className="absolute left-0 top-1/3 w-2 h-32 bg-accent" />
         <div className="absolute left-0 top-2/3 w-2 h-24 bg-accent" />
@@ -73,9 +73,15 @@ export default function ComingSoonPage() {
             DO IT LIKE A PRO
           </div>
           <nav className="hidden md:flex gap-8 text-sm font-semibold uppercase tracking-wider">
-            <a href="#" className="hover:opacity-50 transition-opacity">ABOUT</a>
-            <a href="#" className="hover:opacity-50 transition-opacity">UPDATES</a>
-            <a href="#" className="hover:opacity-50 transition-opacity">CONTACT</a>
+            <a href="#" className="hover:opacity-50 transition-opacity">
+              ABOUT
+            </a>
+            <a href="#" className="hover:opacity-50 transition-opacity">
+              UPDATES
+            </a>
+            <a href="#" className="hover:opacity-50 transition-opacity">
+              CONTACT
+            </a>
           </nav>
         </div>
       </header>
@@ -83,20 +89,25 @@ export default function ComingSoonPage() {
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-200px)] px-6">
         {/* Pre-heading */}
-        <div className={`mb-12 text-center transform transition-all duration-1000 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
+        <div
+          className={`mb-12 text-center transform transition-all duration-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
           <br></br>
           <div className="inline-block border-4 border-primary px-6 py-2 mb-8">
-          
-            <span className="text-xs font-black uppercase tracking-[0.2em]">Something Extraordinary</span>
+            <span className="text-xs font-black uppercase tracking-[0.2em]">
+              Something Extraordinary
+            </span>
           </div>
         </div>
 
         {/* Main Heading */}
-        <h1 className={`text-center mb-6 transform transition-all duration-1000 delay-200 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
+        <h1
+          className={`text-center mb-6 transform transition-all duration-1000 delay-200 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
           <span className="block text-6xl sm:text-7xl lg:text-8xl font-black leading-none tracking-tight mb-4">
             COMING
           </span>
@@ -107,20 +118,28 @@ export default function ComingSoonPage() {
         </h1>
 
         {/* Decorative line */}
-        <div className={`w-32 h-1 bg-primary my-12 transform transition-all duration-1000 delay-300 ${
-          isVisible ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
-        } origin-left`} />
+        <div
+          className={`w-32 h-1 bg-primary my-12 transform transition-all duration-1000 delay-300 ${
+            isVisible ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
+          } origin-left`}
+        />
 
         {/* Subheading */}
-        <p className={`text-center max-w-2xl text-lg sm:text-xl font-medium text-muted-foreground mb-16 transform transition-all duration-1000 delay-400 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
-          Master your craft at the highest level. We're building the platform that separates pros from amateurs.
+        <p
+          className={`text-center max-w-2xl text-lg sm:text-xl font-medium text-muted-foreground mb-16 transform transition-all duration-1000 delay-400 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          Master your craft at the highest level. We're building the platform
+          that separates pros from amateurs.
         </p>
 
-        <form onSubmit={handleEmailSubmit} className={`w-full max-w-md transform transition-all duration-1000 delay-500 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
+        <form
+          onSubmit={handleEmailSubmit}
+          className={`w-full max-w-md transform transition-all duration-1000 delay-500 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
           <div className="flex flex-col sm:flex-row gap-3">
             <input
               type="email"
@@ -129,40 +148,58 @@ export default function ComingSoonPage() {
               placeholder="your@email.com"
               disabled={isLoading}
               required
-              className="flex-1 bg-background border-3 border-primary px-6 py-4 font-semibold uppercase text-sm tracking-wider placeholder-muted-foreground focus:outline-none focus:ring-4 focus:ring-primary/50 transition-all disabled:opacity-50"
+              className="flex-1 bg-background border-3 border-primary px-6 py-4 font-semibold lowercase text-sm tracking-wider placeholder-muted-foreground focus:outline-none focus:ring-4 focus:ring-primary/50 transition-all disabled:opacity-50"
             />
             <button
               type="submit"
               disabled={isLoading}
               className="bg-primary text-primary-foreground border-3 border-primary px-8 py-4 font-black uppercase tracking-wider text-sm hover:bg-primary/90 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
-              {isLoading ? 'REGISTERING...' : 'NOTIFY ME'}
+              {isLoading ? "REGISTERING..." : "NOTIFY ME"}
             </button>
           </div>
         </form>
 
         {/* Social Links */}
-        <div className={`mt-20 flex gap-8 transform transition-all duration-1000 delay-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
-          <a href="#" className="font-black text-sm uppercase tracking-wider hover:opacity-50 transition-opacity">
+        <div
+          className={`mt-20 flex gap-8 transform transition-all duration-1000 delay-700 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          <a
+            href="https://x.com/do_itlikeapro"
+            target="_blank"
+            className="font-black text-sm uppercase tracking-wider hover:opacity-50 transition-opacity"
+          >
             TWITTER
           </a>
-          <a href="#" className="font-black text-sm uppercase tracking-wider hover:opacity-50 transition-opacity">
+          <a
+            href="https://www.linkedin.com/company/do-it-like-a-pro/#"
+            target="_blank"
+            className="font-black text-sm uppercase tracking-wider hover:opacity-50 transition-opacity"
+          >
             LINKEDIN
           </a>
-          <a href="#" className="font-black text-sm uppercase tracking-wider hover:opacity-50 transition-opacity">
+          <a
+            href="https://www.instagram.com/do_itlikeapro/"
+            className="font-black text-sm uppercase tracking-wider hover:opacity-50 transition-opacity"
+            target="_blank"
+          >
             INSTAGRAM
           </a>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className={`fixed bottom-8 left-1/2 transform -translate-x-1/2 z-20 transition-all duration-300 ${
-        scrollY > 100 ? 'opacity-0 pointer-events-none' : 'opacity-100'
-      }`}>
+      <div
+        className={`fixed bottom-8 left-1/2 transform -translate-x-1/2 z-20 transition-all duration-300 ${
+          scrollY > 100 ? "opacity-0 pointer-events-none" : "opacity-100"
+        }`}
+      >
         <div className="flex flex-col items-center gap-2 animate-bounce">
-          <span className="text-xs font-black uppercase tracking-wider">SCROLL</span>
+          <span className="text-xs font-black uppercase tracking-wider">
+            SCROLL
+          </span>
           <ChevronDown size={20} strokeWidth={3} />
         </div>
       </div>
@@ -180,5 +217,5 @@ export default function ComingSoonPage() {
       </footer>
       <Toaster />
     </main>
-  )
+  );
 }
