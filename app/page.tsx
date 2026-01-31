@@ -1,13 +1,17 @@
 'use client'
 
-import React from "react"
-
 import { useEffect, useState } from 'react'
 import { ChevronDown } from 'lucide-react'
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
+import { db } from '@/lib/firebase'
+import { toast } from 'sonner'
+import { Toaster } from '@/components/ui/sonner'
 
 export default function ComingSoonPage() {
   const [isVisible, setIsVisible] = useState(false)
   const [scrollY, setScrollY] = useState(0)
+  const [email, setEmail] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     setIsVisible(true)
@@ -20,12 +24,31 @@ export default function ComingSoonPage() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleEmailSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    const formData = new FormData(e.currentTarget)
-    const email = formData.get('email')
-    console.log('Email submitted:', email)
-    e.currentTarget.reset()
+    
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      toast.error('Please enter a valid email address')
+      return
+    }
+
+    setIsLoading(true)
+
+    try {
+      await addDoc(collection(db, 'registrations'), {
+        email,
+        timestamp: serverTimestamp(),
+        status: 'pending'
+      })
+      
+      toast.success('Thanks for registering! We\'ll notify you when we launch.')
+      setEmail('')
+    } catch (error: any) {
+      console.error('Registration error:', error)
+      toast.error(error?.message || 'Registration failed. Please try again.')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -95,23 +118,25 @@ export default function ComingSoonPage() {
           Master your craft at the highest level. We're building the platform that separates pros from amateurs.
         </p>
 
-        {/* Email Capture */}
         <form onSubmit={handleEmailSubmit} className={`w-full max-w-md transform transition-all duration-1000 delay-500 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
           <div className="flex flex-col sm:flex-row gap-3">
             <input
               type="email"
-              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
+              disabled={isLoading}
               required
-              className="flex-1 bg-background border-3 border-primary px-6 py-4 font-semibold uppercase text-sm tracking-wider placeholder-muted-foreground focus:outline-none focus:ring-4 focus:ring-primary/50 transition-all"
+              className="flex-1 bg-background border-3 border-primary px-6 py-4 font-semibold uppercase text-sm tracking-wider placeholder-muted-foreground focus:outline-none focus:ring-4 focus:ring-primary/50 transition-all disabled:opacity-50"
             />
             <button
               type="submit"
-              className="bg-primary text-primary-foreground border-3 border-primary px-8 py-4 font-black uppercase tracking-wider text-sm hover:bg-primary/90 transition-all active:scale-95"
+              disabled={isLoading}
+              className="bg-primary text-primary-foreground border-3 border-primary px-8 py-4 font-black uppercase tracking-wider text-sm hover:bg-primary/90 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
-              NOTIFY ME
+              {isLoading ? 'REGISTERING...' : 'NOTIFY ME'}
             </button>
           </div>
         </form>
@@ -153,6 +178,7 @@ export default function ComingSoonPage() {
           </div>
         </div>
       </footer>
+      <Toaster />
     </main>
   )
 }
