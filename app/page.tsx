@@ -187,6 +187,13 @@ export default function ComingSoonPage() {
           >
             INSTAGRAM
           </a>
+          <a
+            href="https://whatsapp.com/channel/0029VbC6wdR42DckDxGq2m39"
+            className="font-black text-sm uppercase tracking-wider hover:opacity-50 transition-opacity"
+            target="_blank"
+          >
+            WHATSAPP CHANNEL
+          </a>
         </div>
       </div>
 
