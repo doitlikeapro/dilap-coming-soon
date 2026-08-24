@@ -82,12 +82,6 @@ export const projects = [
     description:
       "Erasmus project app on Google Play — contributed to development and ongoing maintenance.",
   },
-  {
-    title: "Baigan Bytes 🍆",
-    href: null,
-    description:
-      "A daily computer-science newsletter — exciting and humorous articles that make CS concepts stick.",
-  },
 ];
 
 export const skills = [
