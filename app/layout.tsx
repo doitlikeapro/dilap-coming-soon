@@ -9,9 +9,9 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Do it like a pro - Coming Soon",
+  title: "Do it like a pro - Directory",
   description:
-    "Something extraordinary is coming. Master your craft like never before.",
+    "Everything on itlikeapro.com in one place — connect, wash, and the platform to come.",
 };
 
 export default function RootLayout({
