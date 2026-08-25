@@ -10,8 +10,39 @@ const subdomains = [
     host: "connect.itlikeapro.com",
     href: "https://connect.itlikeapro.com",
     external: true,
+    dev: false,
     description:
       "A self-hosted, open-source MCP gateway that lets Claude use many accounts of the same service — multiple Gmails, Slacks, GitHubs — through a single connector.",
+  },
+  {
+    tag: "WORDPRESS AI",
+    name: "AI TUNNEL",
+    host: "tunnel.itlikeapro.com",
+    href: "https://tunnel.itlikeapro.com",
+    external: true,
+    dev: false,
+    description:
+      "A safe, permission-scoped door into WordPress for Claude, ChatGPT and any AI assistant — with the Guard add-on for spend limits and approvals.",
+  },
+  {
+    tag: "CI AUTOMATION",
+    name: "AO WATCHTOWER",
+    host: "watchtower.itlikeapro.com",
+    href: "https://watchtower.itlikeapro.com",
+    external: true,
+    dev: false,
+    description:
+      "Turns failed GitHub pull-request checks into supervised AI repairs. Self-hosted, one binary, approval-first, full audit ledger.",
+  },
+  {
+    tag: "ANDROID APP",
+    name: "SHOTBOX",
+    host: "shotbox.itlikeapro.com",
+    href: "https://shotbox.itlikeapro.com",
+    external: true,
+    dev: false,
+    description:
+      "Screenshots auto-sorted and searchable by the text inside them. 100% on-device — no cloud, no account, no ads. Live on Google Play.",
   },
   {
     tag: "LAUNDRY SERVICE",
@@ -19,6 +50,7 @@ const subdomains = [
     host: "wash.itlikeapro.com",
     href: "https://wash.itlikeapro.com",
     external: true,
+    dev: false,
     description:
       "Laundry pickup, washing, and delivery — booked through a simple WhatsApp-based ordering page.",
   },
@@ -28,8 +60,39 @@ const subdomains = [
     host: "bramhank.does.itlikeapro.com",
     href: "https://bramhank.does.itlikeapro.com",
     external: true,
+    dev: false,
     description:
       "Bramhank Mishra — full-stack web developer & technical operations. Experience, projects, and skills.",
+  },
+  {
+    tag: "IN DEVELOPMENT",
+    name: "FLOWS",
+    host: "flows.itlikeapro.com",
+    href: "https://flows.itlikeapro.com",
+    external: true,
+    dev: true,
+    description:
+      "Done-for-you business automation: workflows designed, hosted and monitored on hardened infrastructure. Founding waitlist open.",
+  },
+  {
+    tag: "IN DEVELOPMENT",
+    name: "WTWT",
+    host: "wtwt.itlikeapro.com",
+    href: "https://wtwt.itlikeapro.com",
+    external: true,
+    dev: true,
+    description:
+      "What To Wear Today — a digital closet that reasons over your real wardrobe. Android app in final testing.",
+  },
+  {
+    tag: "IN DEVELOPMENT",
+    name: "TRADEKIT",
+    host: "tradekit.itlikeapro.com",
+    href: "https://tradekit.itlikeapro.com",
+    external: true,
+    dev: true,
+    description:
+      "A precision toolkit for market data: fetcher, indicators, backtesting and one clean OHLCV pipeline.",
   },
   {
     tag: "COMING SOON",
@@ -37,6 +100,7 @@ const subdomains = [
     host: "do.itlikeapro.com/coming-soon",
     href: "/coming-soon",
     external: false,
+    dev: true,
     description:
       "The main event. Master your craft at the highest level — register to be notified when we launch.",
   },
@@ -66,7 +130,7 @@ export default function DirectoryPage() {
             DO IT LIKE A PRO
           </div>
           <nav className="hidden md:flex gap-8 text-sm font-semibold uppercase tracking-wider">
-            {subdomains.map((s) => (
+            {subdomains.slice(0, 6).map((s) => (
               <a
                 key={s.name}
                 href={s.href}
@@ -122,7 +186,9 @@ export default function DirectoryPage() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          Every corner of itlikeapro.com, in one place. Pick a door.
+          Every corner of itlikeapro.com, in one place. Pick a door. Anything
+          tagged &ldquo;in development&rdquo; is on the roadmap and shipping
+          next.
         </p>
 
         {/* Subdomain Cards */}
@@ -140,7 +206,13 @@ export default function DirectoryPage() {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <span className="inline-block bg-accent text-accent-foreground px-3 py-1 text-xs font-black uppercase tracking-[0.2em] mb-4">
+                  <span
+                    className={`inline-block px-3 py-1 text-xs font-black uppercase tracking-[0.2em] mb-4 ${
+                      s.dev
+                        ? "border-2 border-primary text-foreground"
+                        : "bg-accent text-accent-foreground"
+                    }`}
+                  >
                     {s.tag}
                   </span>
                   <h2 className="text-2xl sm:text-3xl font-black tracking-tight leading-none mb-2">
