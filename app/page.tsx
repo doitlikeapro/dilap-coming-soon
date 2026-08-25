@@ -45,6 +45,56 @@ const subdomains = [
       "Screenshots auto-sorted and searchable by the text inside them. 100% on-device — no cloud, no account, no ads. Live on Google Play.",
   },
   {
+    tag: "EMAIL AI",
+    name: "AUTODRAFT",
+    host: "autodraft.itlikeapro.com",
+    href: "https://autodraft.itlikeapro.com",
+    external: true,
+    dev: false,
+    description:
+      "A draft reply in your own style for every new Outlook email — read-and-draft permissions only, it physically cannot send. Ships with the Insights dashboard.",
+  },
+  {
+    tag: "FLEET SECURITY",
+    name: "EAGLE",
+    host: "eagle.itlikeapro.com",
+    href: "https://eagle.itlikeapro.com",
+    external: true,
+    dev: false,
+    description:
+      "WordPress fleet security: a read-only watchdog every 15 minutes plus Curfew, the out-of-hours editing lock.",
+  },
+  {
+    tag: "BACKUPS",
+    name: "BACKUP MCP",
+    host: "backup.itlikeapro.com",
+    href: "https://backup.itlikeapro.com",
+    external: true,
+    dev: false,
+    description:
+      "Full-site WordPress backups your AI assistant can drive — built for shared hosting, no SSH or WP-CLI needed.",
+  },
+  {
+    tag: "SEO",
+    name: "SEO PILOT",
+    host: "seopilot.itlikeapro.com",
+    href: "https://seopilot.itlikeapro.com",
+    external: true,
+    dev: false,
+    description:
+      "The SEO tool that grades its own advice: daily Google data, weekly AI analysis, every recommendation judged against real results.",
+  },
+  {
+    tag: "FLEET OPS",
+    name: "TGFLEET",
+    host: "tgfleet.itlikeapro.com",
+    href: "https://tgfleet.itlikeapro.com",
+    external: true,
+    dev: false,
+    description:
+      "Run your whole WordPress fleet from one Telegram chat — reads are instant, changes wait for your Approve button.",
+  },
+  {
     tag: "LAUNDRY SERVICE",
     name: "WASH",
     host: "wash.itlikeapro.com",
@@ -83,6 +133,26 @@ const subdomains = [
     dev: true,
     description:
       "What To Wear Today — a digital closet that reasons over your real wardrobe. Android app in final testing.",
+  },
+  {
+    tag: "IN DEVELOPMENT",
+    name: "LINGO",
+    host: "lingo.itlikeapro.com",
+    href: "https://lingo.itlikeapro.com",
+    external: true,
+    dev: true,
+    description:
+      "Lightweight WordPress translation that owns its data — TranslatePress-compatible, hreflang-correct, machine translation optional.",
+  },
+  {
+    tag: "IN DEVELOPMENT",
+    name: "TASKBRIDGE",
+    host: "taskbridge.itlikeapro.com",
+    href: "https://taskbridge.itlikeapro.com",
+    external: true,
+    dev: true,
+    description:
+      "A Planner-style task portal for contractors and external staff — synced with Microsoft Planner, no tenant mailboxes needed.",
   },
   {
     tag: "IN DEVELOPMENT",
